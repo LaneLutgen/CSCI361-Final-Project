@@ -5,19 +5,11 @@ space:	.asciiz	" "		# whitespace to separate prime numbers
 
 	.text			# the text segment to store instructions
 	.globl 	main		# define main to be a global label
-main:	li	$s0, 0x00000000	# initialize $s0 with zeros
-	li	$s1, 0x11111111	# initialize $s1 with ones
+main:	li	$s0, 0x11111111	# initialize $s0 with ones
+	li	$s1, 0x00000000	# initialize $s1 with zeroes
 	li	$t9, 200	# find prime numbers from 2 to $t9
 
 	add	$s2, $sp, 0	# backup bottom of stack address in $s2
-
-	li	$t0, 2		# set counter variable to 2
-
-init:	sw	$s1, ($sp)	# write ones to the stackpointer's address
-	add	$t0, $t0, 1	# increment counter variable
-	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer (push)
-	ble	$t0, $t9, init	# take loop while $t0 <= $t9
-
 	li	$t0, 1		# reset counter variable to 1
 
 outer:	add 	$t0, $t0, 1	# increment counter variable (start at 2)
