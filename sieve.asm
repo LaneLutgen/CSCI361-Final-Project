@@ -12,11 +12,13 @@ main:	li	$s0, 0x11111111	# initialize $s0 with ones
 	li	$t0, 1		# reset counter variable to 1
 
 outer:	add 	$t0, $t0, 1	# increment counter variable (start at 2)
-	mul	$t1, $t0, 2	# multiply $t0 by 2 and save to $t1
+	#mul	$t1, $t0, 2	# multiply $t0 by 2 and save to $t1
+	sll  	$t1, $t0, 1
 	bgt	$t1, $t9, print	# start printing prime numbers when $t1 > $t9
 
 check:	add	$t2, $s2, 0	# save the bottom of stack address to $t2
-	mul	$t3, $t0, 4	# calculate the number of bytes to jump over
+	#mul	$t3, $t0, 4	# calculate the number of bytes to jump over
+	sll	$t3, $t0, 2
 	sub	$t2, $t2, $t3	# subtract them from bottom of stack address
 	add	$t2, $t2, 8	# add 2 words - we started counting at 2!
 
@@ -25,7 +27,8 @@ check:	add	$t2, $s2, 0	# save the bottom of stack address to $t2
 	beq	$t3, $s0, outer	# only 1's? go back to the outer loop
 
 inner:	add	$t2, $s2, 0	# save the bottom of stack address to $t2
-	mul	$t3, $t1, 4	# calculate the number of bytes to jump over
+	#mul	$t3, $t1, 4	# calculate the number of bytes to jump over
+	sll 	$t3, $t1, 2
 	sub	$t2, $t2, $t3	# subtract them from bottom of stack address
 	add	$t2, $t2, 8	# add 2 words - we started counting at 2!
 
@@ -42,7 +45,8 @@ count:	add	$t0, $t0, 1	# increment counter variable (start at 2)
 	bgt	$t0, $t9, exit	# make sure to exit when all numbers are done
 
 	add	$t2, $s2, 0	# save the bottom of stack address to $t2
-	mul	$t3, $t0, 4	# calculate the number of bytes to jump over
+	#mul	$t3, $t0, 4	# calculate the number of bytes to jump over
+	sll	$t3, $t0, 2
 	sub	$t2, $t2, $t3	# subtract them from bottom of stack address
 	add	$t2, $t2, 8	# add 2 words - we started counting at 2!
 
