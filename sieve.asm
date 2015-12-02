@@ -18,7 +18,7 @@ outer:	addi  	$t0, $t0, 1	# increment counter variable (start at 2)
 check:	addi	$t2, $s2, 0	# save the bottom of stack address to $t2
 	addi	$t3, $t0, 1
 	sub	$t2, $t2, $t3	# subtract them from bottom of stack address
-	#addi	$t2, $t2, 2	# add 2 words - we started counting at 2!
+	addi	$t2, $t2, 2	# add 2 words - we started counting at 2!
 
 	lb	$t3, ($t2)	# load the content into $t3
 
