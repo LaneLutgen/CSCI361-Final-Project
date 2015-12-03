@@ -7,6 +7,7 @@ space:	.asciiz	" "		# whitespace to separate prime numbers
 	.globl 	main		# define main to be a global label
 main:	li	$s0, 0x11	# initialize $s0 with ones
 	li	$t9, 200	# find prime numbers from 2 to $t9
+	li	$s1, 15
 	addi	$s2, $sp, 0	# backup bottom of stack address in $s2
 	li	$t0, 1		# reset counter variable to 1
 
@@ -17,7 +18,7 @@ main:	li	$s0, 0x11	# initialize $s0 with ones
 
 check:	addi  	$t0, $t0, 1	# increment counter variable (start at 2)
 	sll  	$t1, $t0, 1	# multiply $t0 by 2 and save to $t1
-	beq	$t1, $t9, print	
+	beq	$t0, $s1, print	
 	
 	addi	$t3, $t0, 1
 	sub	$t2, $s2, $t3	# subtract them from bottom of stack address
