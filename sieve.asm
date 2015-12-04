@@ -5,16 +5,12 @@ space:	.asciiz	" "		# whitespace to separate prime numbers
 
 	.text			# the text segment to store instructions
 	.globl 	main		# define main to be a global label
+	
 main:	li	$s0, 0x11	# initialize $s0 with ones
 	li	$t9, 200	# find prime numbers from 2 to $t9
-	li	$s1, 15
+	li	$s1, 14
 	addi	$s2, $sp, 0	# backup bottom of stack address in $s2
 	li	$t0, 1		# reset counter variable to 1
-
-#outer:	addi  	$t0, $t0, 1	# increment counter variable (start at 2)
-#	sll  	$t1, $t0, 1	# multiply $t0 by 2 and save to $t1	
-#	bne 	$t1, $t9, check	
-#	j	print		# start printing prime numbers when $t1 > $t9
 
 check:	addi  	$t0, $t0, 1	# increment counter variable (start at 2)
 	sll  	$t1, $t0, 1	# multiply $t0 by 2 and save to $t1
@@ -22,14 +18,12 @@ check:	addi  	$t0, $t0, 1	# increment counter variable (start at 2)
 	
 	addi	$t3, $t0, 1
 	sub	$t2, $s2, $t3	# subtract them from bottom of stack address
-
 	lb	$t3, 2($t2)	# load the content into $t3
 
 	beq	$t3, $s0, check	# only 1's? go back to the outer loop
 	
 inner:	addi 	$t3, $t1, 1
 	sub	$t2, $s2, $t3	# subtract them from bottom of stack address
-	
 	sb	$s0, 2($t2)	# store 1's -> it's not a prime number!	
 
 	add	$t1, $t1, $t0	# do this for every multiple of $t0
