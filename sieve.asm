@@ -28,6 +28,18 @@ inner:	addi 	$t3, $t1, 1
 
 	add	$t1, $t1, $t0	# do this for every multiple of $t0
 	
+	addi 	$t3, $t1, 1
+	sub	$t2, $s2, $t3	# subtract them from bottom of stack address
+	sb	$s0, 2($t2)	# store 1's -> it's not a prime number!	
+	
+	add	$t1, $t1, $t0	# do this for every multiple of $t0
+	
+	addi 	$t3, $t1, 1
+	sub	$t2, $s2, $t3	# subtract them from bottom of stack address
+	sb	$s0, 2($t2)	# store 1's -> it's not a prime number!	
+	
+	add	$t1, $t1, $t0	# do this for every multiple of $t0
+	
 	blt	$t1, $t9, inner
 	
 	j	check
